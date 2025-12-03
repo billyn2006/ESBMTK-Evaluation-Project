@@ -39,12 +39,12 @@ for index, row in df.iterrows():
 
     results.append({
         "Date": row["Date"],
-        "Pressure_dbar": row["P"],
-        "Temperature_C": row["T"],
-        "Salinity_PSU": row["S"],
-        "DIC_umolkg": row["DIC"],
-        "TA_umolkg": row["TA"],
-        "modelled_pH": ph
+        "Pressure": row["P"],
+        "Temperature": row["T"],
+        "Salinity": row["S"],
+        "DIC": row["DIC"],
+        "TA": row["TA"],
+        "Modelled_pH": ph
     })
 
 df = pd.DataFrame(results)
