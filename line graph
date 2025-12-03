@@ -1,0 +1,25 @@
+import pandas as pd
+import seaborn as sb
+import matplotlib.pyplot as plt
+
+df = pd.read("set directory")
+
+df["Month"] = pd.to_datetime(df["Month"], format="%Y-%m")
+plt.figure(figsize=(10,5))
+sb.lineplot(data=df, x="Month", y="pH", color="darkgreen", label="Recorded-pH")
+sb.lineplot(data=df, x="Month", y="modelled_pH", color="darkblue", label="Modelled-pH")
+
+plt.xlabel("Years")
+plt.ylabel("pH Value")
+plt.title("Station Name")
+ax = plt.gca()
+ax.xaxis.set_major_locator(mdates.YearLocator(2))
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
+
+plt.text(0.05, 0.9, "Spearman's rho: \nP-Value: ",
+         transform=ax.transAxes, fontsize=12)
+
+plt.legend()
+plt.tight_layout()
+plt.savefig("filename.png", dpi=300)
+plt.show()
