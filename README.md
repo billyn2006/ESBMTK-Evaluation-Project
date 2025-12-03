@@ -1,1 +1,2 @@
 # ESBMTK-Evaluation-Project
+This repositry was originally created as part of a university coursework project, evaluating the Earth Science Box Modelling Toolkit by Wortmann et al. (2025). Its primary purpose is storage and organisaiton of code utilised during data exploratory analysis and communication. While it may not serve as a fully-fledged application, it serves as a structured collection of materials that showcase part of the coursework.  
