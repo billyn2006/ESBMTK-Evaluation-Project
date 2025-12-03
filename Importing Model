@@ -2,3 +2,50 @@ import pandas as pd
 from esbmtk import Model, Resevoir 
 
 pd.read_csv("set raw-data directory")
+
+M = Model(
+    stop="6 Myr",
+    max_timestep="1 kyr",
+    element=["Carbon"],
+    concentration_unit="mol/kg",
+    opt_k_carbonic=13,
+    opt_pH_scale=1,
+    opt_buffers_mode=2,
+)
+
+results = []
+
+for index, row in df.iterrows():
+    if pd.isna(row['DIC']) or pd.isna(row['TA']) or row['DIC'] <= 0 or row['TA'] <= 0:
+        continue
+
+    box = Reservoir(
+        name=f"S_b_{index}",
+        geometry=[-200, -800, 1],
+        concentration={
+            M.DIC: f"{row['DIC']} umol/kg",
+            M.TA: f"{row['TA']} umol/kg"
+        },
+        seawater_parameters={
+            "T": row["T"],
+            "P": row["P"]/10,  
+            "S": row["S"],
+        },
+        register=M,
+    )
+
+    box.swc.update = True  
+    ph = box.swc.pH  
+
+    results.append({
+        "Date": row["Date"],
+        "Pressure_dbar": row["P"],
+        "Temperature_C": row["T"],
+        "Salinity_PSU": row["S"],
+        "DIC_umolkg": row["DIC"],
+        "TA_umolkg": row["TA"],
+        "modelled_pH": ph
+    })
+
+df = pd.DataFrame(results)
+df.head()
