@@ -1,0 +1,12 @@
+import pandas as pd
+import seaborn as sb
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("set directory")
+
+sb.heatmap(df, annot=True, cmap="RdBu", vmin=-4.8, vmax=5)
+plt.xlabel("Model Variables")
+plt.ylabel("Percentage Change")
+plt.title("Visaulising pH Sensitivity to Percentage Change")
+plt.savefig("filename.png", dpi=300)
+plt.show()
