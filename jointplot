@@ -1,0 +1,14 @@
+import pandas as pd
+import seaborn as sb
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("set directory here")
+
+jointplot = sns.jointplot(data=df, x='pH', y='modelled_pH', height = 6, ratio = 2, kind="reg", joint_kws={'line_kws': {'color': 'red'}}, marginal_ticks = True)
+plt.tight_layout()
+jointplot.ax_joint.set_ylabel('Modelled-pH')
+jointplot.ax_joint.set_xlabel('Recorded-pH')
+plt.subplots_adjust(top=0.9) 
+jointplot.fig.text(x=0.435, y=0.915, s="Station Name", fontsize=12)
+
+jointplot.fig.savefig('WHOTSJOINT.png', dpi=300, bbox_inches='tight')
